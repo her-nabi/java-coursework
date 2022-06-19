@@ -30,6 +30,12 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'io.swagger.core.v3:swagger-annotations:2.2.0'
+    implementation 'org.slf4j:slf4j-api:1.7.36'
+    implementation 'ch.qos.reload4j:reload4j:1.2.21'
+    implementation 'org.mapstruct:mapstruct:1.5.2.Final'
+    implementation 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+
 }
 
 tasks.named('test') {
