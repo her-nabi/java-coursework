@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.abdullaeva.javacoursework.model.base.State;
+
 
 import java.util.Set;
 import java.util.UUID;
@@ -13,9 +13,9 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ContentDto {
+public class ContentDtoForAms {
+
     private UUID contentGuid;
     private Set<PageDto> pages;
-    private String data;
-    private State state;
+
 }

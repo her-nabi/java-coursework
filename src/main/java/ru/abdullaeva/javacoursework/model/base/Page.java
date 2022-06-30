@@ -1,5 +1,6 @@
 package ru.abdullaeva.javacoursework.model.base;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,7 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -29,10 +31,11 @@ public class Page implements Serializable {
     @NotBlank(message = "Поле не должно быть пустым")
     private String name;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(name = "content_page",
             joinColumns = @JoinColumn(name = "page_id"),
             inverseJoinColumns = @JoinColumn(name = "content_id"))
-    Set<Content> contents;
+    List<Content> contents = new ArrayList<>();
 
 }
