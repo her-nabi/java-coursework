@@ -14,6 +14,7 @@ ____
 * Swagger
 * SLF4J-reload4j
 * MapStruct
+* JsonWebToken
 ****
 ### Запуск проекта
 **Туториал по запуску проекта:**
