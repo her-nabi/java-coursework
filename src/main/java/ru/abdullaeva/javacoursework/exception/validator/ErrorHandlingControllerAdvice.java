@@ -1,4 +1,4 @@
-package ru.abdullaeva.javacoursework.validator;
+package ru.abdullaeva.javacoursework.exception.validator;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

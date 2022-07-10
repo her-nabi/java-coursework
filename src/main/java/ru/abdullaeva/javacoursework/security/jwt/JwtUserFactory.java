@@ -14,6 +14,11 @@ public final class JwtUserFactory {
     public JwtUserFactory() {
     }
 
+    /**
+     * Создание пользователя для работы с Spring Security.
+     * @param user - Объект класса User, используемый для создания пользователя для JWT
+     * @return Jwt пользователь
+     */
     public static JwtUser create(Users user) {
         HashSet hashSet = new HashSet<>();
         hashSet.add(user.getRole());
@@ -25,6 +30,11 @@ public final class JwtUserFactory {
         );
     }
 
+    /**
+     * Метод конвертирует роль User пользователя в authorities JWT пользователя
+     * @param userRoles Роль пользователя User
+     * @return authorities JwtUser
+     */
     private static List<GrantedAuthority> mapToGrantedAuthorities(Set<Role> userRoles) {
         return userRoles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))

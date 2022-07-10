@@ -1,5 +1,7 @@
 package ru.abdullaeva.javacoursework.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@Tag(name = "Authentication controller", description = "Управление аутентификацией")
 public class AuthenticationController {
 
     private final AuthenticationManager authenticationManager;
@@ -34,6 +37,7 @@ public class AuthenticationController {
         this.usersService = usersService;
     }
 
+    @Operation(summary = "Аутентификация пользователя" ,description = "Позволяет аутентифицировать пользователя приложения")
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationRequestDto requestDto) {
         try {

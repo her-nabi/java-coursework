@@ -1,5 +1,6 @@
 package ru.abdullaeva.javacoursework.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -7,11 +8,9 @@ import ru.abdullaeva.javacoursework.dto.ContentDto;
 import ru.abdullaeva.javacoursework.dto.ContentDtoForAms;
 import ru.abdullaeva.javacoursework.dto.ContentDtoForCds;
 import ru.abdullaeva.javacoursework.dto.GuidContentDto;
-import ru.abdullaeva.javacoursework.mappers.ContentMapper;
-import ru.abdullaeva.javacoursework.mappers.ContentMapperForAms;
-import ru.abdullaeva.javacoursework.mappers.ContentMapperForCds;
 import ru.abdullaeva.javacoursework.model.base.Content;
 import ru.abdullaeva.javacoursework.service.interf.ContentService;
+import ru.abdullaeva.javacoursework.service.interf.WebContentService;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,58 +19,53 @@ import java.util.UUID;
 @RequestMapping("/api/v1/content")
 @Tag(name = "Content controller")
 public class ContentController {
+
     private final ContentService contentService;
-    private final ContentMapper contentMapper;
-    private final ContentMapperForAms contentMapperForAms;
-    private final ContentMapperForCds contentMapperForCds;
+    private final WebContentService webContentService;
 
     @Autowired
-    public ContentController(ContentService contentService, ContentMapper contentMapper, ContentMapperForAms contentMapperForAms, ContentMapperForCds contentMapperForCds) {
+    public ContentController(ContentService contentService, WebContentService webContentService) {
         this.contentService = contentService;
-        this.contentMapper = contentMapper;
-        this.contentMapperForAms = contentMapperForAms;
-        this.contentMapperForCds = contentMapperForCds;
+        this.webContentService = webContentService;
     }
 
+    @Operation(summary = "Сохранить контент", description = "Сохранение в базу данных контента, полученного с фронта")
     @PostMapping("/save")
     public void save(@RequestBody List<ContentDto> contents) {
-        List<Content> contents1 = contentMapper.toContentList(contents);
-        contentService.save(contents1);
-
+        webContentService.save(contents);
     }
 
+    @Operation(summary = "Просмотр контента", description = "Получмть весь контент из базы данных")
     @GetMapping()
     public List<ContentDto> getAll() {
-        List<Content> allContent = contentService.getAllContent();
-        return contentMapper.toDtoList(allContent);
+       return webContentService.getAllContent();
     }
 
+    @Operation(summary = "Просмотр контента для ams", description = "Просмотр контента в формате для микросерфиса ams")
     @GetMapping("/ams")
     public List<ContentDtoForAms> getAllForAms() {
-        List<Content> allContent = contentService.getAllContent();
-        contentMapperForAms.contentListToContentDtoList(allContent);
-
-        return contentMapperForAms.contentListToContentDtoList(allContent);
+        return webContentService.getAllContentForAms();
     }
+
+    @Operation(summary = "Просмотр контента для cds", description = "Просмотр контента в формате для микросервиса cds")
     @GetMapping("/cds")
     public List<ContentDtoForCds> getAllForCds() {
-        List<Content> allContent = contentService.getAllContent();
-        contentMapperForCds.contentListToContentDtoList(allContent);
-
-        return contentMapperForCds.contentListToContentDtoList(allContent);
+        return webContentService.getAllContentForCds();
     }
 
+    @Operation(summary = "Публикация контента", description = "Публикует весь контент из базы данных, который еще не было опубликован")
     @PutMapping("/publish")
     public void changeState() {
         contentService.changeState();
-
     }
 
+    @Operation(summary = "Публикация контента", description = "Публикует контент по списку с id")
     @PutMapping("/publish/list")
     public void changeState(@RequestBody List<GuidContentDto> listGuidContents) {
         contentService.changeState(listGuidContents);
     }
 
+    @Operation(summary = "Публикация контента", description = "Публикует одну запись по id")
     @PutMapping("/publish/{id}")
     public void changeState(@PathVariable UUID id) {
         contentService.changeState(id);

@@ -1,4 +1,4 @@
-package ru.abdullaeva.javacoursework.mappers;
+package ru.abdullaeva.javacoursework.exception;
 
 import java.util.NoSuchElementException;
 

@@ -26,7 +26,6 @@ public class JwtUser implements UserDetails {
         this.authorities = authorities;
     }
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -72,6 +71,10 @@ public class JwtUser implements UserDetails {
         return id;
     }
 
+    /**
+     * Метод для получения логина пользователя Jwt
+     * @return login пользователя JwtUser
+     */
     public String getLogin() {
         return login;
     }

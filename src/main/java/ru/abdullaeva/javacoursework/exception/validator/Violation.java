@@ -1,4 +1,4 @@
-package ru.abdullaeva.javacoursework.validator;
+package ru.abdullaeva.javacoursework.exception.validator;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

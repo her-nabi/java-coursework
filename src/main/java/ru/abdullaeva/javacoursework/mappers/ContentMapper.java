@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.abdullaeva.javacoursework.dto.ContentDto;
 import ru.abdullaeva.javacoursework.dto.PageDto;
+import ru.abdullaeva.javacoursework.exception.NoSuchPageException;
 import ru.abdullaeva.javacoursework.model.base.Content;
 import ru.abdullaeva.javacoursework.model.base.Page;
 import ru.abdullaeva.javacoursework.model.base.State;
